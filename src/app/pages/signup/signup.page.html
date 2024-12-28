@@ -1,0 +1,141 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons> -->
+    <ion-title>Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Sign up</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Create an account</ion-card-title>
+      <ion-card-subtitle>Please fill in the details below</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="systemUserForm" (ngSubmit)="onSubmit()">
+        <ion-grid>
+          <!-- Login Name -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Login Name</ion-label>
+                <ion-input formControlName="loginName" [clearInput]="true" [counter]="true" maxlength="100"
+                  placeholder="Enter your login name"></ion-input>
+              </ion-item>
+              <ion-note color="danger"
+                *ngIf="getFormControl('loginName')?.invalid && getFormControl('loginName')?.touched">
+                Login name is required.
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+          <!-- First Name -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">First Name</ion-label>
+                <ion-input formControlName="firstName" [clearInput]="true" [counter]="true" maxlength="100"
+                  placeholder="Enter your first name"></ion-input>
+              </ion-item>
+              <ion-note color="danger"
+                *ngIf="getFormControl('firstName')?.invalid && getFormControl('firstName')?.touched">
+                First name is required.
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+          <!-- Last Name -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Last Name</ion-label>
+                <ion-input formControlName="lastName" [clearInput]="true" [counter]="true" maxlength="100"
+                  placeholder="Enter your last name"></ion-input>
+              </ion-item>
+              <ion-note color="danger"
+                *ngIf="getFormControl('lastName')?.invalid && getFormControl('lastName')?.touched">
+                Last name is required.
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+          <!-- Email -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Email Address</ion-label>
+                <ion-input type="email" formControlName="emailAddress" [clearInput]="true" [counter]="true"
+                  maxlength="100" placeholder="Enter your email"></ion-input>
+              </ion-item>
+              <ion-note color="danger"
+                *ngIf="getFormControl('emailAddress')?.invalid && getFormControl('emailAddress')?.touched">
+                A valid email is required.
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+          <!-- Phone Number -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Phone Number</ion-label>
+                <ion-input type="tel" formControlName="phoneNumber" [clearInput]="true" [counter]="true" maxlength="20"
+                  placeholder="Enter your phone number"></ion-input>
+              </ion-item>
+              <ion-note color="danger"
+                *ngIf="getFormControl('phoneNumber')?.invalid && getFormControl('phoneNumber')?.touched">
+                A valid phone number is required.
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+          <!-- Password -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="passwordHash"
+                  [clearInput]="true" [counter]="true" maxlength="255" placeholder="Enter your password"></ion-input>
+                <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()">
+                  <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+                </ion-button>
+              </ion-item>
+              <ion-note color="danger"
+                *ngIf="getFormControl('passwordHash')?.invalid && getFormControl('passwordHash')?.touched">
+                Password is required.
+              </ion-note>
+            </ion-col>
+          </ion-row>
+
+          <!-- Sign Up Button -->
+          <ion-row>
+            <ion-col size="12">
+              <ion-button expand="block" size="large" type="submit" [disabled]="systemUserForm.invalid || isLoading">
+                <ion-spinner *ngIf="isLoading"></ion-spinner>
+                <span *ngIf="!isLoading">Sign Up</span>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+
+      <!-- Redirect to Login -->
+      <ion-row class="ion-margin-top">
+        <ion-col size="12" class="ion-text-center">
+          <p>Already have an account? <a routerLink="/signin">Sign in</a></p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

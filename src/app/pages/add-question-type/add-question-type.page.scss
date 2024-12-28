@@ -1,0 +1,83 @@
+ion-menu-button {
+  color: var(--ion-color-primary);
+}
+
+ion-content {
+  --background: #f9f9f9;
+
+  form {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  ion-item {
+    margin-bottom: 1.5rem;
+    --inner-padding-top: 12px;
+    --inner-padding-bottom: 12px;
+    --background: #f2f2f2;
+    border-radius: 10px;
+  }
+
+  ion-label {
+    font-weight: 600;
+    color: #34495e;
+  }
+
+  ion-input,
+  ion-select {
+    --color: #2c3e50;
+  }
+
+  ion-button {
+    margin-top: 1.5rem;
+    --background: #3498db;
+    --border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.photo-frame {
+  margin: 0 auto 10px;
+  border: 1px solid #d1d1d1;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+ion-button.custom-button {
+  --border-radius: 8px;
+  --padding-start: 15px;
+  --padding-end: 15px;
+  --min-height: 44px;
+  margin-bottom: 0px;
+}
+
+.button-row {
+  margin-bottom: -20px;
+}
+
+.button-row:first-child {
+  margin-top: 20px;
+}
+
+.button-row:last-child {
+  margin-bottom: 20px;
+}
+
+ion-datetime {
+  --button-background: #e0e0e0;
+  --button-border-radius: 10px;
+}
+
+ion-note[color="danger"] {
+  color: #e74c3c;
+  font-weight: 600;
+}

@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Questions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Questions</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-card *ngFor="let question of questions">
+      <ion-card-header>
+        <ion-card-title>{{ question.text }}</ion-card-title>
+        <ion-card-subtitle>
+          Question Order: {{ question.order }}<br>
+          Mandatory: {{ question.isMandatory === 'Yes' ? 'Yes' : 'No' }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Survey ID:</strong> {{ question.surveyId }}</p>
+        <p><strong>Type ID:</strong> {{ question.questionTypeId }}</p>
+        <p><strong>Created:</strong> {{ question.createdAt | date: 'medium' }}</p>
+        <p><strong>Updated:</strong> {{ question.updatedAt ? (question.updatedAt | date: 'medium') : 'N/A' }}</p>
+
+        <ion-button fill="clear" slot="end" class="action-sheet-btn" (click)="presentActionSheet(question)">
+          <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddQuestion()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

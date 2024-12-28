@@ -1,0 +1,197 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/system-users"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add System User</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add System User</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="systemUserForm" (ngSubmit)="submitSystemUserForm()">
+
+    <!-- Profile Picture Frame -->
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col size="12" class="ion-text-center">
+          <ion-img class="photo-frame" *ngIf="profilePictureUrl" [src]="profilePictureUrl"
+            (click)="takeProfilePicture()"></ion-img>
+          <ion-img class="photo-frame" *ngIf="!profilePictureUrl" src="../../assets/no-image-placeholder.svg"
+            (click)="takeProfilePicture()"></ion-img>
+        </ion-col>
+      </ion-row>
+
+      <!-- Take Profile Picture -->
+      <ion-row class="ion-justify-content-center ion-align-items-center button-row">
+        <ion-col size="auto" class="ion-text-center">
+          <ion-button color="primary" fill="outline" class="custom-button" (click)="takeProfilePicture()">
+            <ion-icon slot="start" name="camera-outline"></ion-icon>
+            Take a Photo
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- Select Image -->
+      <ion-row class="ion-justify-content-center ion-align-items-center button-row">
+        <ion-col size="auto" class="ion-text-center">
+          <ion-button color="primary" fill="outline" class="custom-button" (click)="selectImage()">
+            <ion-icon slot="start" name="image-outline"></ion-icon>
+            Pick an Image
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- Remove Image -->
+      <ion-row class="ion-justify-content-center ion-align-items-center button-row">
+        <ion-col size="auto" class="ion-text-center">
+          <ion-button color="danger" fill="outline" class="custom-button" (click)="removeImage()">
+            <ion-icon slot="start" name="trash-outline"></ion-icon>
+            Remove Image
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Login Name -->
+    <ion-item>
+      <ion-label position="floating">Login Name</ion-label>
+      <ion-input formControlName="loginName" [clearInput]="true" [counter]="true" maxlength="100"
+        placeholder="Enter login name"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('loginName')?.hasError('required') && getFormControl('loginName')?.touched">
+      The login name is required.
+    </ion-note>
+
+    <!-- First Name -->
+    <ion-item>
+      <ion-label position="floating">First Name</ion-label>
+      <ion-input formControlName="firstName" [clearInput]="true" [counter]="true" maxlength="100"
+        placeholder="Enter first name"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('firstName')?.hasError('required') && getFormControl('firstName')?.touched">
+      The first name is required.
+    </ion-note>
+
+    <!-- Last Name -->
+    <ion-item>
+      <ion-label position="floating">Last Name</ion-label>
+      <ion-input formControlName="lastName" [clearInput]="true" [counter]="true" maxlength="100"
+        placeholder="Enter last name"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('lastName')?.hasError('required') && getFormControl('lastName')?.touched">
+      The last name is required.
+    </ion-note>
+
+    <!-- Email Address -->
+    <ion-item>
+      <ion-label position="floating">Email Address</ion-label>
+      <ion-input formControlName="emailAddress" [clearInput]="true" [counter]="true" maxlength="100"
+        placeholder="Enter email address"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('emailAddress')?.hasError('required') && getFormControl('emailAddress')?.touched">
+      The email address is required.
+    </ion-note>
+
+    <!-- Phone Number -->
+    <ion-item>
+      <ion-label position="floating">Phone Number</ion-label>
+      <ion-input formControlName="phoneNumber" [clearInput]="true" [counter]="true" maxlength="20"
+        placeholder="Enter phone number"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('phoneNumber')?.hasError('required') && getFormControl('phoneNumber')?.touched">
+      The phone number is required.
+    </ion-note>
+
+    <!-- Password -->
+    <ion-item>
+      <ion-label position="floating">Password</ion-label>
+      <ion-input formControlName="passwordHash" [type]="showPassword ? 'text' : 'password'" [clearInput]="true"
+        [counter]="true" maxlength="255" placeholder="Enter password"></ion-input>
+      <ion-buttons slot="end">
+        <ion-button (click)="togglePasswordVisibility()" fill="clear">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('passwordHash')?.hasError('required') && getFormControl('passwordHash')?.touched">
+      The password is required.
+    </ion-note>
+
+    <!-- Status -->
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select formControlName="status" placeholder="Select status">
+        <ion-select-option value="Active">Active</ion-select-option>
+        <ion-select-option value="Inactive">Inactive</ion-select-option>
+        <ion-select-option value="Suspended">Suspended</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('status')?.hasError('required') && getFormControl('status')?.touched">
+      The status is required.
+    </ion-note>
+
+    <!-- Token Version -->
+    <ion-item>
+      <ion-label position="floating">Token Version</ion-label>
+      <ion-input formControlName="tokenVersion" type="number" min="1" placeholder="Enter token version"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('tokenVersion')?.hasError('required') && getFormControl('tokenVersion')?.touched">
+      The token version is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('tokenVersion')?.hasError('min') && getFormControl('tokenVersion')?.touched">
+      The token version must be at least 1.
+    </ion-note>
+
+    <!-- Last Login Date -->
+    <ion-item>
+      <ion-label>Last Login Date</ion-label>
+      <ion-datetime-button datetime="lastLoginDatetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="lastLoginDatetime" formControlName="lastLoginAt" presentation="date-time" hour-cycle="h23"
+      show-default-buttons="false"></ion-datetime>
+
+    <!-- Last Password Change Date -->
+    <ion-item>
+      <ion-label>Last Password Change</ion-label>
+      <ion-datetime-button datetime="lastPasswordChangeDatetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="lastPasswordChangeDatetime" formControlName="lastPasswordChangeAt" presentation="date-time"
+      hour-cycle="h23" show-default-buttons="false"></ion-datetime>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!systemUserForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add System User</span>
+    </ion-button>
+  </form>
+
+</ion-content>

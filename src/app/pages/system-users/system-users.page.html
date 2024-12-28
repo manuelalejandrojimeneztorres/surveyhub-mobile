@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>System Users</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">System Users</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-card *ngFor="let systemUser of systemUsers">
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img *ngIf="systemUser.profilePicture; else defaultAvatar"
+            [src]="'http://localhost:8080/images/' + systemUser.profilePicture"
+            [alt]="systemUser.firstName + ' ' + systemUser.lastName + '\'s Profile Picture'">
+          <ng-template #defaultAvatar>
+            <ion-icon name="person-circle-outline" size="large"></ion-icon>
+          </ng-template>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ systemUser.firstName }} {{ systemUser.lastName }}</h2>
+          <p>{{ systemUser.emailAddress }}</p>
+          <p>Status: <strong>{{ systemUser.status }}</strong></p>
+        </ion-label>
+        <ion-button fill="clear" slot="end" (click)="presentActionSheet(systemUser)" class="action-sheet-btn">
+          <ion-icon ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddSystemUser()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

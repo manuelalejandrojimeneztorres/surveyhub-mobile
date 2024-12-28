@@ -1,0 +1,36 @@
+ion-menu-button {
+    color: var(--ion-color-primary);
+}
+
+ion-item {
+    --background: #ffffff;
+    --border-color: #f0f0f0;
+    --inner-padding-start: 15px;
+    --inner-padding-end: 15px;
+    --min-height: 50px;
+}
+
+ion-label {
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+ion-item-options {
+    ion-item-option {
+        font-weight: 500;
+        font-size: 1em;
+
+        ion-icon {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+    }
+}
+
+ion-item-sliding {
+    margin-bottom: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}

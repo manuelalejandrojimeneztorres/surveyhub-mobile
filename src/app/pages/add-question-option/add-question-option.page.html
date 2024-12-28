@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/question-options"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Question Option</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add Question Option</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="questionOptionForm" (ngSubmit)="submitQuestionOptionForm()">
+    <!-- Question ID -->
+    <ion-item>
+      <ion-label position="floating">Question ID</ion-label>
+      <ion-input formControlName="questionId" type="number" min="1" placeholder="Enter question ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionId')?.hasError('required') && getFormControl('questionId')?.touched">
+      The question ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionId')?.hasError('min') && getFormControl('questionId')?.touched">
+      The question ID must be at least 1.
+    </ion-note>
+
+    <!-- Order -->
+    <ion-item>
+      <ion-label position="floating">Order</ion-label>
+      <ion-input formControlName="order" type="number" min="1" placeholder="Enter order"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="getFormControl('order')?.hasError('required') && getFormControl('order')?.touched">
+      The order is required.
+    </ion-note>
+    <ion-note color="danger" *ngIf="getFormControl('order')?.hasError('min') && getFormControl('order')?.touched">
+      The order must be at least 1.
+    </ion-note>
+
+    <!-- Value -->
+    <ion-item>
+      <ion-label position="floating">Value</ion-label>
+      <ion-input formControlName="value" [clearInput]="true" [counter]="true" maxlength="255"
+        placeholder="Enter value"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="getFormControl('value')?.hasError('required') && getFormControl('value')?.touched">
+      The value is required.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!questionOptionForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add Question Option</span>
+    </ion-button>
+  </form>
+
+</ion-content>

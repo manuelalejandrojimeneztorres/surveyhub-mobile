@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/survey-statuses"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Update Survey Status</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Update Survey Status</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="surveyStatusForm" (ngSubmit)="updateSurveyStatus()">
+    <ion-item>
+      <ion-label position="floating">Select Survey Status</ion-label>
+      <ion-select formControlName="status" interface="popover">
+        <ion-select-option value="Planned">Planned</ion-select-option>
+        <ion-select-option value="Open">Open</ion-select-option>
+        <ion-select-option value="Closed">Closed</ion-select-option>
+        <ion-select-option value="Suspended">Suspended</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('status')?.hasError('required') && getFormControl('status')?.touched">
+      The survey status is required.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!surveyStatusForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Update Survey Status</span>
+    </ion-button>
+  </form>
+
+</ion-content>

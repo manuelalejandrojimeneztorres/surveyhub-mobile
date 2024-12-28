@@ -1,0 +1,106 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/surveys"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Survey</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add Survey</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="surveyForm" (ngSubmit)="createSurvey()">
+    <ion-item>
+      <ion-label position="floating">Survey Name</ion-label>
+      <ion-input formControlName="name" [clearInput]="true" [counter]="true" maxlength="255"
+        placeholder="Enter survey name"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="getFormControl('name')?.hasError('required') && getFormControl('name')?.touched">
+      The name is required.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-input formControlName="description" [clearInput]="true" [counter]="true" maxlength="255"
+        placeholder="Enter survey description"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('description')?.hasError('required') && getFormControl('description')?.touched">
+      The description is required.
+    </ion-note>
+
+    <ion-item>
+      <ion-label>Start Date</ion-label>
+      <ion-datetime-button datetime="startDatetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="startDatetime" formControlName="startDate" presentation="date-time" hour-cycle="h23"
+      show-default-buttons="false"></ion-datetime>
+
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime-button datetime="endDatetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="endDatetime" formControlName="endDate" presentation="date-time" hour-cycle="h23"
+      show-default-buttons="false"></ion-datetime>
+
+    <ion-item>
+      <ion-label position="floating">Min Responses</ion-label>
+      <ion-input formControlName="minResponses" type="number" min="0"
+        placeholder="Enter min responses (optional)"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('minResponses')?.hasError('min') && getFormControl('minResponses')?.touched">
+      The min responses must be at least 0.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Max Responses</ion-label>
+      <ion-input formControlName="maxResponses" type="number" min="0"
+        placeholder="Enter max responses (optional)"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('maxResponses')?.hasError('min') && getFormControl('maxResponses')?.touched">
+      The max responses must be at least 0.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Survey Status ID</ion-label>
+      <ion-input formControlName="surveyStatusId" type="number" min="1"
+        placeholder="Enter survey status ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('surveyStatusId')?.hasError('required') && getFormControl('surveyStatusId')?.touched">
+      The survey status ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('surveyStatusId')?.hasError('min') && getFormControl('surveyStatusId')?.touched">
+      The survey status ID must be at least 1.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!surveyForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add Survey</span>
+    </ion-button>
+  </form>
+
+</ion-content>

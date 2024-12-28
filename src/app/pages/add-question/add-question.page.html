@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/questions"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Question</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add Question</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="questionForm" (ngSubmit)="submitQuestionForm()">
+    <!-- Survey ID -->
+    <ion-item>
+      <ion-label position="floating">Survey ID</ion-label>
+      <ion-input formControlName="surveyId" type="number" min="1" placeholder="Enter survey ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('surveyId')?.hasError('required') && getFormControl('surveyId')?.touched">
+      The survey ID is required.
+    </ion-note>
+    <ion-note color="danger" *ngIf="getFormControl('surveyId')?.hasError('min') && getFormControl('surveyId')?.touched">
+      The survey ID must be at least 1.
+    </ion-note>
+
+    <!-- Question Type ID -->
+    <ion-item>
+      <ion-label position="floating">Question Type ID</ion-label>
+      <ion-input formControlName="questionTypeId" type="number" min="1"
+        placeholder="Enter question type ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionTypeId')?.hasError('required') && getFormControl('questionTypeId')?.touched">
+      The question type ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionTypeId')?.hasError('min') && getFormControl('questionTypeId')?.touched">
+      The question type ID must be at least 1.
+    </ion-note>
+
+    <!-- Order -->
+    <ion-item>
+      <ion-label position="floating">Order</ion-label>
+      <ion-input formControlName="order" type="number" min="1" placeholder="Enter order"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="getFormControl('order')?.hasError('required') && getFormControl('order')?.touched">
+      The order is required.
+    </ion-note>
+    <ion-note color="danger" *ngIf="getFormControl('order')?.hasError('min') && getFormControl('order')?.touched">
+      The order must be at least 1.
+    </ion-note>
+
+    <!-- Text -->
+    <ion-item>
+      <ion-label position="floating">Text</ion-label>
+      <ion-input formControlName="text" [clearInput]="true" [counter]="true" maxlength="255"
+        placeholder="Enter text"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="getFormControl('text')?.hasError('required') && getFormControl('text')?.touched">
+      The text is required.
+    </ion-note>
+
+    <!-- Is Mandatory -->
+    <ion-item>
+      <ion-label>Is it mandatory?</ion-label>
+      <ion-select formControlName="isMandatory" placeholder="Select mandatory">
+        <ion-select-option value="No">No</ion-select-option>
+        <ion-select-option value="Yes">Yes</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('isMandatory')?.hasError('required') && getFormControl('isMandatory')?.touched">
+      The mandatory is required.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!questionForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add Question</span>
+    </ion-button>
+  </form>
+
+</ion-content>

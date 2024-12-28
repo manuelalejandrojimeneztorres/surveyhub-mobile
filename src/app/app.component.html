@@ -1,0 +1,60 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+
+          <div class="profile-container">
+            <ion-avatar class="profile-avatar">
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+
+            <div class="profile-info">
+              <ion-list-header class="profile-name">Manuel Alejandro</ion-list-header>
+              <ion-note class="profile-email">manuelalejandro&#64;gmail.com</ion-note>
+            </div>
+          </div>
+
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+              routerLinkActive="selected">
+              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+
+        <ion-list id="labels-list">
+          <ion-list-header>Labels</ion-list-header>
+
+          <ion-item *ngFor="let label of labels" lines="none">
+            <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+            <ion-label>{{ label }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+
+      <ion-footer>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button>
+              <ion-icon slot="start" ios="settings-outline" md="settings-sharp"></ion-icon>
+              Settings
+            </ion-button>
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <ion-button (click)="toggleDarkMode()">
+              <ion-icon slot="icon-only" [name]="darkModeIcon"></ion-icon>
+            </ion-button>
+            <ion-button color="danger" (click)="presentLogoutAlert()">
+              <ion-icon slot="icon-only" ios="exit-outline" md="exit-sharp"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-footer>
+
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
