@@ -5,7 +5,7 @@
 ![Capacitor.js](https://img.shields.io/badge/Capacitor.js-6.1.2-brightgreen?style=for-the-badge&logo=capacitor)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4.0-blue?style=for-the-badge&logo=typescript)
 ![JWT](https://img.shields.io/badge/JWT-Security-critical?style=for-the-badge&logo=jsonwebtokens)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=for-the-badge)
 ![Build Status](https://img.shields.io/github/actions/workflow/status/manuelalejandrojimeneztorres/surveyhub-mobile/mobile-ci.yml?style=for-the-badge)
 ![Platform Support](https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20Web-orange?style=for-the-badge)
 ![Dependencies](https://img.shields.io/badge/Dependencies-Up%20to%20date-brightgreen?style=for-the-badge)
@@ -266,7 +266,7 @@ For support, contact:
 
 ## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more details.
+This project is licensed under the **Apache License 2.0**. See the [LICENSE.txt](LICENSE.txt) file for more details.
 
 [🔼 Back to Top](#table-of-contents)
 
