@@ -4,6 +4,7 @@ import { SystemUserInterface } from '../interfaces/system-user.interface';
 import { AuthResponseInterface } from '../interfaces/auth-response.interface';
 import { Observable, tap } from 'rxjs';
 import { Storage } from '@ionic/storage-angular';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -75,11 +76,36 @@ export class AuthService {
     }
   }
 
-  async isSignedIn() {
-    let token = await this.storage.get('token');
-    if (token) { // Just check if exists. This should be checked with current date.
+  /*   async isSignedIn() {
+      let token = await this.storage.get('token');
+      if (token) { // Just check if exists. This should be checked with current date.
+        return true;
+      }
+      return false;
+    } */
+
+  async isSignedIn(): Promise<boolean> {
+    const token = await this.getToken();
+    if (!token || this.isTokenExpired(token)) {
+      return false;
+    }
+    return true;
+  }
+
+  async getToken(): Promise<string | null> {
+    return await this.storage.get('token');
+  }
+
+  isTokenExpired(token: string): boolean {
+    if (!token) return true;
+
+    try {
+      const decodedToken: any = jwtDecode(token);
+      const expiryDate = decodedToken.exp * 1000;
+      return Date.now() > expiryDate;
+    } catch (error) {
+      console.error('Error decoding token:', error);
       return true;
     }
-    return false;
   }
 }
