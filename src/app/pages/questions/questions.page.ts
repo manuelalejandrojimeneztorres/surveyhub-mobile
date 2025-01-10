@@ -31,6 +31,15 @@ export class QuestionsPage implements OnInit {
     this.loadQuestions();
   }
 
+  async navigateToEditProfile() {
+    const systemUserId = await this.authService.getSystemUserIdFromToken();
+    if (systemUserId) {
+      this.router.navigate(['/edit-profile', systemUserId]);
+    } else {
+      console.error('SystemUser ID not found in token');
+    }
+  }
+
   async loadQuestions() {
     const token = await this.storage.get('token');
     this.questionService.getQuestions(token).subscribe((data: QuestionInterface[]) => {

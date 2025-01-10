@@ -1,10 +1,10 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <!-- <ion-buttons slot="start">
+  <!-- <ion-toolbar>
+    <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons> -->
+    </ion-buttons>
     <ion-title>Sign in</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
@@ -15,28 +15,32 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid class="ion-align-items-center ion-justify-content-center" fixed>
+  <ion-grid class="ion-align-items-center ion-justify-content-center login-container" fixed>
     <ion-row>
       <ion-col size-md="6" size-lg="5" size-xs="12">
-        <ion-card>
+        <ion-card class="login-card">
           <ion-card-header>
-            <ion-card-title class="ion-text-center">Sign in</ion-card-title>
+            <ion-card-title class="ion-text-center login-title">Welcome Back</ion-card-title>
+            <!-- <ion-card-subtitle>Please sign in to continue</ion-card-subtitle> -->
+            <p class="ion-text-center login-subtitle">Please sign in to continue</p>
           </ion-card-header>
           <ion-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-              <ion-item>
+              <ion-item class="custom-item">
                 <ion-label position="floating">Login Name</ion-label>
                 <ion-input formControlName="loginName" type="text" [clearInput]="true" [counter]="true" maxlength="100"
-                  placeholder="Enter your login name"></ion-input>
+                  placeholder="Enter your login name">
+                </ion-input>
               </ion-item>
               <ion-note color="danger"
-              *ngIf="getFormControl('loginName')?.hasError('required') && getFormControl('loginName')?.touched">
-              Login name is required.
-            </ion-note>
-              <ion-item>
+                *ngIf="getFormControl('loginName')?.hasError('required') && getFormControl('loginName')?.touched">
+                Login name is required.
+              </ion-note>
+              <ion-item class="custom-item">
                 <ion-label position="floating">Password</ion-label>
                 <ion-input formControlName="password" [type]="showPassword ? 'text' : 'password'" [clearInput]="true"
-                  [counter]="true" maxlength="255" placeholder="Enter your password"></ion-input>
+                  [counter]="true" maxlength="255" placeholder="Enter your password">
+                </ion-input>
                 <ion-buttons slot="end">
                   <ion-button (click)="togglePasswordVisibility()" fill="clear">
                     <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
@@ -44,16 +48,22 @@
                 </ion-buttons>
               </ion-item>
               <ion-note color="danger"
-              *ngIf="getFormControl('password')?.hasError('required') && getFormControl('password')?.touched">
-              Password is required.
-            </ion-note>
-              <ion-button expand="block" size="large" type="submit" [disabled]="loginForm.invalid || isLoading">
+                *ngIf="getFormControl('password')?.hasError('required') && getFormControl('password')?.touched">
+                Password is required.
+              </ion-note>
+              <ion-button expand="block" size="large" type="submit" class="sign-in-button"
+                [disabled]="loginForm.invalid || isLoading">
                 <ion-spinner *ngIf="isLoading"></ion-spinner>
                 <span *ngIf="!isLoading">Sign In</span>
               </ion-button>
             </form>
             <div class="ion-text-center ion-margin-top">
-              Don’t have an account? <a routerLink="/signup">Sign up</a>
+              <p>
+                <a routerLink="/forgot-password" class="forgot-password-link">Forgot your password?</a>
+              </p>
+              <p>
+                Don’t have an account? <a routerLink="/signup" class="signup-link">Sign up</a>
+              </p>
             </div>
           </ion-card-content>
         </ion-card>

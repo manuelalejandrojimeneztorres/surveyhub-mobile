@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,31 +8,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
+
   public cards = [
     { title: 'Survey Statuses', url: 'survey-statuses', icon: 'checkmark-done-outline', description: 'Manage survey statuses' },
     { title: 'Surveys', url: 'surveys', icon: 'document-text-outline', description: 'Manage surveys' },
-    { title: 'Questions', url: 'questions', icon: 'help-outline', description: 'Manage questions' },
     { title: 'Question Types', url: 'question-types', icon: 'options-outline', description: 'Manage question types' },
+    { title: 'Questions', url: 'questions', icon: 'help-outline', description: 'Manage questions' },
     { title: 'Question Options', url: 'question-options', icon: 'list-outline', description: 'Manage question options' },
     { title: 'System Users', url: 'system-users', icon: 'people-outline', description: 'Manage system users' },
   ];
-
   public filteredCards = [...this.cards];
   public showSearchBar = false;
   public searchQuery = '';
 
-  constructor(private router: Router, private renderer: Renderer2) { }
+  constructor(private router: Router,
+    private renderer: Renderer2,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() { }
-
-  navigateTo(page: string) {
-    this.router.navigate([`/${page}`]);
-  }
 
   toggleSearchBar() {
     this.showSearchBar = !this.showSearchBar;
     if (!this.showSearchBar) {
       this.clearSearch();
+    }
+  }
+
+  async navigateToEditProfile() {
+    const systemUserId = await this.authService.getSystemUserIdFromToken();
+    if (systemUserId) {
+      this.router.navigate(['/edit-profile', systemUserId]);
+    } else {
+      console.error('SystemUser ID not found in token');
     }
   }
 
@@ -60,4 +69,9 @@ export class DashboardPage implements OnInit {
       this.clearSearch();
     }
   }
+
+  navigateTo(page: string) {
+    this.router.navigate([`/${page}`]);
+  }
+
 }

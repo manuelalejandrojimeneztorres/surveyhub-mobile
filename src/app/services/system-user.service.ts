@@ -9,6 +9,7 @@ import { SystemUserInterface } from '../interfaces/system-user.interface';
 })
 export class SystemUserService {
 
+  // private readonly systemUsersEndpoint = 'http://localhost:8080/api/v1/system-users';
   private systemUsersEndpoint = 'http://localhost:8080/api/v1/system-users';
 
   constructor(private httpClient: HttpClient) { }
@@ -43,9 +44,6 @@ export class SystemUserService {
       systemUserFormData.append('profilePicture', profilePictureBlob, `profilePicture.${fileType}`);
     }
 
-    systemUserFormData.append("lastLoginAt", systemUser.lastLoginAt);
-    systemUserFormData.append("lastPasswordChangeAt", systemUser.lastPasswordChangeAt);
-
     return this.httpClient.post(this.systemUsersEndpoint, systemUserFormData);
   }
 
@@ -55,7 +53,7 @@ export class SystemUserService {
     return this.httpClient.delete(`${this.systemUsersEndpoint}/${id}`, { headers });
   }
 
-  getSystemUserById(id: any, token: string) {
+  getSystemUserById(id: any, token: string): Observable<SystemUserInterface> {
     const headers = this.getAuthHeaders(token);
 
     return this.httpClient.get<SystemUserInterface>(`${this.systemUsersEndpoint}/${id}`, { headers });
@@ -78,9 +76,6 @@ export class SystemUserService {
       const fileType = profilePictureBlob.type.split('/')[1];
       systemUserFormData.append('profilePicture', profilePictureBlob, `profilePicture.${fileType}`);
     }
-
-    systemUserFormData.append('lastLoginAt', systemUser.lastLoginAt);
-    systemUserFormData.append('lastPasswordChangeAt', systemUser.lastPasswordChangeAt);
 
     return this.httpClient.put(`${this.systemUsersEndpoint}/${id}`, systemUserFormData, { headers });
   }

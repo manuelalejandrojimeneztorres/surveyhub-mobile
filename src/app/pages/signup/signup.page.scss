@@ -1,0 +1,50 @@
+.signup-container {
+    height: 140vh;
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+}
+
+.signup-card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.signup-subtitle {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #64748b;
+}
+
+.custom-item {
+    --highlight-color-focused: #2563eb;
+    --border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.sign-up-button {
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: #1e40af;
+    }
+}
+
+.signin-link {
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: #1e40af;
+    }
+}

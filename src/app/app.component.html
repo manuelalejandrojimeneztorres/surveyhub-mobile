@@ -2,40 +2,59 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
-        <ion-list id="inbox-list">
-
-          <div class="profile-container">
+        <!-- Perfil del usuario -->
+        <div class="profile-container">
+          <div class="profile-header">
             <ion-avatar class="profile-avatar">
-              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <img *ngIf="systemUser?.profilePicture; else defaultAvatar"
+                [src]="'http://localhost:8080/images/' + systemUser?.profilePicture"
+                [alt]="systemUser?.firstName + ' ' + systemUser?.lastName + '\'s Profile Picture'">
+              <ng-template #defaultAvatar>
+                <ion-icon name="person-circle-outline" class="default-avatar-icon"></ion-icon>
+              </ng-template>
             </ion-avatar>
-
             <div class="profile-info">
-              <ion-list-header class="profile-name">Manuel Alejandro</ion-list-header>
-              <ion-note class="profile-email">manuelalejandro&#64;gmail.com</ion-note>
+              <h2 class="profile-name">{{ systemUser?.firstName }} {{ systemUser?.lastName }}</h2>
+              <p class="profile-email">{{ systemUser?.emailAddress }}</p>
             </div>
           </div>
+          <div class="profile-divider"></div>
+        </div>
 
+        <!-- Lista principal -->
+        <!-- <ion-list id="menu-list">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false"
+            <ion-item routerDirection="root" [routerLink]="[p.url]" lines="full" detail="false" class="menu-item"
               routerLinkActive="selected">
-              <ion-icon aria-hidden="true" slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" class="menu-icon"></ion-icon>
+              <ion-label>{{ p.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list> -->
+
+        <ion-list id="menu-list">
+          <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+            <ion-item routerDirection="root" [routerLink]="p.url !== null ? [p.url] : null" lines="full" detail="false"
+              class="menu-item" routerLinkActive="selected" (click)="p.action ? p.action() : null">
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'" class="menu-icon"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
 
+        <!-- Lista de etiquetas -->
         <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          <ion-item *ngFor="let label of labels" lines="none">
-            <ion-icon aria-hidden="true" slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
+          <ion-list-header class="labels-header">Trends</ion-list-header>
+          <ion-item *ngFor="let label of labels" lines="none" class="label-item">
+            <ion-icon slot="start" ios="trending-up-outline" md="trending-up-sharp" class="label-icon"></ion-icon>
             <ion-label>{{ label }}</ion-label>
           </ion-item>
         </ion-list>
       </ion-content>
 
+      <!-- Pie de menú -->
       <ion-footer>
-        <ion-toolbar>
+        <ion-toolbar class="footer-toolbar">
           <ion-buttons slot="start">
             <ion-button>
               <ion-icon slot="start" ios="settings-outline" md="settings-sharp"></ion-icon>
@@ -53,8 +72,8 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-footer>
-
     </ion-menu>
+
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

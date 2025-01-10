@@ -13,6 +13,8 @@ export class AuthService {
 
   initializedStorage: boolean = false;
 
+  private readonly TOKEN_KEY = 'token';
+
   AUTH_SERVER_ADDRESS: string = 'http://localhost:8080';
 
   constructor(private httpClient: HttpClient, private storage: Storage) {
@@ -67,9 +69,9 @@ export class AuthService {
     );
   }
 
-  async signOut() {
+  async signOut(): Promise<void> {
     try {
-      await this.storage.remove('token');
+      await this.removeToken();
       console.log('Logout successful');
     } catch (error) {
       console.error('Error clearing session:', error);
@@ -92,8 +94,25 @@ export class AuthService {
     return true;
   }
 
+  async getSystemUserIdFromToken(): Promise<string | null> {
+    const token = await this.getToken();
+    if (!token || this.isTokenExpired(token)) return null;
+
+    try {
+      const decodedToken: { id: string } = jwtDecode(token);
+      return decodedToken.id || null;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+  async removeToken(): Promise<void> {
+    await this.storage.remove(this.TOKEN_KEY);
+  }
+
   async getToken(): Promise<string | null> {
-    return await this.storage.get('token');
+    return await this.storage.get(this.TOKEN_KEY);
   }
 
   isTokenExpired(token: string): boolean {

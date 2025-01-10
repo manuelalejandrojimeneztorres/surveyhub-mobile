@@ -171,22 +171,6 @@
       The token version must be at least 1.
     </ion-note>
 
-    <!-- Last Login Date -->
-    <ion-item>
-      <ion-label>Last Login Date</ion-label>
-      <ion-datetime-button datetime="lastLoginDatetime"></ion-datetime-button>
-    </ion-item>
-    <ion-datetime id="lastLoginDatetime" formControlName="lastLoginAt" presentation="date-time" hour-cycle="h23"
-      show-default-buttons="false"></ion-datetime>
-
-    <!-- Last Password Change Date -->
-    <ion-item>
-      <ion-label>Last Password Change</ion-label>
-      <ion-datetime-button datetime="lastPasswordChangeDatetime"></ion-datetime-button>
-    </ion-item>
-    <ion-datetime id="lastPasswordChangeDatetime" formControlName="lastPasswordChangeAt" presentation="date-time"
-      hour-cycle="h23" show-default-buttons="false"></ion-datetime>
-
     <!-- Submit Button -->
     <ion-button expand="block" size="large" type="submit" [disabled]="!systemUserForm.valid || isLoading">
       <ion-spinner *ngIf="isLoading"></ion-spinner>

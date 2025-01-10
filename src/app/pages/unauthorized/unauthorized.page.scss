@@ -1,0 +1,87 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(145deg, #f8f9fa, #ffffff);
+    padding: 20px;
+    text-align: center;
+    color: #333333;
+
+    .error-icon {
+        font-size: 90px;
+        color: #007bff;
+        margin-bottom: 20px;
+        animation: swing 1.5s ease-in-out infinite;
+    }
+
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #222222;
+        margin-bottom: 15px;
+    }
+
+    .error-message {
+        font-size: 1.1rem;
+        color: #555555;
+        margin-bottom: 25px;
+        max-width: 600px;
+        line-height: 1.6;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 25px;
+
+        ion-button {
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+
+    .support-info {
+        margin-bottom: 20px;
+
+        a {
+            color: #007bff;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .redirect-timer {
+        font-size: 0.9rem;
+        color: #777777;
+
+        .countdown {
+            font-weight: bold;
+            color: #007bff;
+        }
+    }
+
+    @keyframes swing {
+
+        0%,
+        100% {
+            transform: rotate(-5deg);
+        }
+
+        50% {
+            transform: rotate(5deg);
+        }
+    }
+}

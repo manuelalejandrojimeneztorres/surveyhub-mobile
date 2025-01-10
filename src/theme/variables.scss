@@ -2,9 +2,110 @@
 // http://ionicframework.com/docs/theming/
 
 body.dark-theme {
+    // Colores de fondo y texto
     --ion-background-color: #121212;
-    --ion-text-color: #ffffff;
+    --ion-text-color: #e0e0e0;
     --ion-toolbar-background: #1f1f1f;
     --ion-item-background: #1f1f1f;
-    --ion-item-color: #ffffff;
+    --ion-item-color: #e0e0e0;
+
+    // Fondos de tarjetas
+    --card-background: linear-gradient(145deg, #1e1e1e, #292929);
+    --card-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+
+    // Colores para íconos y detalles
+    --icon-color: #4caf50; // Verde moderno y elegante
+    --icon-hover-color: #81c784; // Verde claro para interacciones
+
+    // Botones y elementos interactivos
+    --button-background: #333333;
+    --button-hover-background: #444444;
+    --button-color: #ffffff;
+
+    // Divisores y bordes
+    --divider-color: #2a2a2a;
+
+    // Colores de sombras y elevaciones
+    --shadow-elevation-light: rgba(255, 255, 255, 0.05);
+    --shadow-elevation-dark: rgba(0, 0, 0, 0.3);
+}
+
+// Aplicación a elementos específicos
+
+// Menú lateral
+ion-menu {
+    background: var(--ion-background-color);
+    color: var(--ion-text-color);
+}
+
+// Tarjetas del Dashboard
+.dashboard-card {
+    --background: var(--card-background);
+    --box-shadow: var(--card-shadow);
+    --border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        --box-shadow: 0px 6px 12px var(--shadow-elevation-dark);
+    }
+
+    &:active {
+        transform: translateY(0);
+        --box-shadow: 0px 4px 6px var(--shadow-elevation-light);
+    }
+
+    .card-icon {
+        color: var(--icon-color);
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: var(--icon-hover-color);
+        }
+    }
+
+    .card-title {
+        color: var(--ion-text-color);
+    }
+
+    .card-description {
+        color: #bdbdbd;
+    }
+}
+
+// Barra de herramientas
+ion-toolbar {
+    background: var(--ion-toolbar-background);
+    color: var(--ion-text-color);
+    box-shadow: 0px 2px 4px var(--shadow-elevation-dark);
+}
+
+// Divisores
+.profile-divider,
+ion-list-header {
+    background-color: var(--divider-color);
+}
+
+// Botones en el pie de menú
+ion-footer ion-button {
+    background: var(--button-background);
+    color: var(--button-color);
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: var(--button-hover-background);
+    }
+}
+
+// Fondo general
+ion-content {
+    background: var(--ion-background-color);
+}
+
+// Lista de ítems
+ion-item {
+    background: var(--ion-item-background);
+    color: var(--ion-item-color);
+    border-radius: 8px;
+    margin: 4px 0;
 }

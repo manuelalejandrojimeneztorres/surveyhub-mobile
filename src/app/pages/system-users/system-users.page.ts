@@ -31,6 +31,15 @@ export class SystemUsersPage implements OnInit {
     this.loadSystemUsers();
   }
 
+  async navigateToEditProfile() {
+    const systemUserId = await this.authService.getSystemUserIdFromToken();
+    if (systemUserId) {
+      this.router.navigate(['/edit-profile', systemUserId]);
+    } else {
+      console.error('SystemUser ID not found in token');
+    }
+  }
+
   async loadSystemUsers() {
     const token = await this.storage.get('token');
     this.systemUserService.getSystemUsers(token).subscribe((data: SystemUserInterface[]) => {

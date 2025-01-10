@@ -8,7 +8,7 @@
       <ion-button (click)="toggleSearchBar()">
         <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
       </ion-button>
-      <ion-button>
+      <ion-button (click)="navigateToEditProfile()">
         <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
       </ion-button>
       <ion-button>
@@ -38,17 +38,24 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6" size-md="4" *ngFor="let card of filteredCards">
-        <ion-card button (click)="navigateTo(card.url)">
+      <ion-col 
+        size="12" size-sm="6" size-md="4" size-lg="3" 
+        *ngFor="let card of filteredCards">
+        <ion-card 
+          class="dashboard-card" 
+          button 
+          (click)="navigateTo(card.url)">
           <ion-card-header>
-            <ion-card-title class="capitalize">{{ card.title }}</ion-card-title>
+            <div class="icon-container">
+              <ion-icon [name]="card.icon" class="card-icon"></ion-icon>
+            </div>
+            <ion-card-title class="card-title">{{ card.title }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <ion-icon [name]="card.icon" size="large"></ion-icon>
-            <p>{{ card.description }}</p>
+            <p class="card-description">{{ card.description }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid>  
 </ion-content>

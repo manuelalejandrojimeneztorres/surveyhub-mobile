@@ -30,6 +30,15 @@ export class SurveyStatusesPage implements OnInit {
     this.loadSurveyStatuses();
   }
 
+  async navigateToEditProfile() {
+    const systemUserId = await this.authService.getSystemUserIdFromToken();
+    if (systemUserId) {
+      this.router.navigate(['/edit-profile', systemUserId]);
+    } else {
+      console.error('SystemUser ID not found in token');
+    }
+  }
+
   async loadSurveyStatuses() {
     const token = await this.storage.get('token');
     this.surveyStatusService.getSurveyStatuses(token).subscribe((data: SurveyStatusInterface[]) => {

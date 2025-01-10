@@ -1,0 +1,111 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(145deg, #f7f9fc, #ffffff);
+    padding: 20px;
+    text-align: center;
+    color: #333333;
+
+    .error-icon {
+        font-size: 100px;
+        color: #ff6f61;
+        margin-bottom: 20px;
+        animation: search-bounce 2s infinite;
+    }
+
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #222222;
+        margin-bottom: 15px;
+    }
+
+    .error-message {
+        font-size: 1.2rem;
+        color: #555555;
+        margin-bottom: 20px;
+        max-width: 600px;
+    }
+
+    .error-reasons {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 30px;
+        font-size: 1rem;
+        color: #666666;
+        text-align: left;
+        max-width: 600px;
+
+        li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+
+            &::before {
+                content: '•';
+                position: absolute;
+                left: 0;
+                top: 0;
+                font-size: 1.2rem;
+                color: #ff6f61;
+            }
+        }
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 25px;
+
+        ion-button {
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+            }
+        }
+    }
+
+    .support-info {
+        margin-bottom: 20px;
+
+        a {
+            color: #ff6f61;
+            font-weight: bold;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .redirect-timer {
+        font-size: 0.9rem;
+        color: #777777;
+
+        .countdown {
+            font-weight: bold;
+            color: #ff6f61;
+        }
+    }
+
+    @keyframes search-bounce {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.2);
+        }
+    }
+}

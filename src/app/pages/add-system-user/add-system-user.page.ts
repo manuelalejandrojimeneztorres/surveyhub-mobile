@@ -36,9 +36,7 @@ export class AddSystemUserPage implements OnInit {
       phoneNumber: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
       passwordHash: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       status: ['Active', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      tokenVersion: ['1', Validators.compose([Validators.required, Validators.min(1)])],
-      lastLoginAt: [''],
-      lastPasswordChangeAt: ['']
+      tokenVersion: ['1', Validators.compose([Validators.required, Validators.min(1)])]
     })
   }
 

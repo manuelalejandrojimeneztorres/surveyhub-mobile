@@ -10,7 +10,7 @@ export const roleGuard: CanActivateFn = async (route, state) => {
   const isAuthenticated = await authService.isSignedIn();
 
   if (!isAuthenticated) {
-    router.navigate(['/signin']);
+    router.navigate(['/unauthorized']);
     return false;
   }
 
@@ -24,7 +24,7 @@ export const roleGuard: CanActivateFn = async (route, state) => {
     const hasRequiredRole = requiredRoles.some((role) => systemUserRoles.includes(role));
 
     if (!hasRequiredRole) {
-      router.navigate(['/unauthorized']);
+      router.navigate(['/forbidden']);
       return false;
     }
 

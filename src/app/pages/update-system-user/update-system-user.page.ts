@@ -39,9 +39,7 @@ export class UpdateSystemUserPage implements OnInit {
       phoneNumber: ['', Validators.compose([Validators.required, Validators.maxLength(20)])],
       passwordHash: ['', Validators.compose([Validators.required, Validators.maxLength(255)])],
       status: ['Active', Validators.compose([Validators.required, Validators.maxLength(50)])],
-      tokenVersion: ['1', Validators.compose([Validators.required, Validators.min(1)])],
-      lastLoginAt: [''],
-      lastPasswordChangeAt: ['']
+      tokenVersion: ['1', Validators.compose([Validators.required, Validators.min(1)])]
     })
   }
 
@@ -86,9 +84,7 @@ export class UpdateSystemUserPage implements OnInit {
         phoneNumber: response.phoneNumber,
         passwordHash: response.passwordHash,
         status: response.status,
-        tokenVersion: response.tokenVersion,
-        lastLoginAt: response.lastLoginAt,
-        lastPasswordChangeAt: response.lastPasswordChangeAt
+        tokenVersion: response.tokenVersion
       });
 
       this.profilePictureUrl = response.profilePicture ? `http://localhost:8080/images/${response.profilePicture}` : '';

@@ -1,0 +1,73 @@
+.statistics-card {
+    --background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    --box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    --border-radius: 16px;
+    --transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    padding: 16px;
+    border-radius: var(--border-radius);
+    background: var(--background);
+    box-shadow: var(--box-shadow);
+
+    &:hover {
+        transform: translateY(-6px);
+        --box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #4caf50, #81c784);
+        margin: 0 auto 12px auto;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+
+        .card-icon {
+            color: #ffffff;
+            font-size: 32px;
+        }
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #333333;
+        margin-bottom: 8px;
+    }
+
+    .card-count {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #4caf50; // Verde llamativo para datos clave
+        margin: 8px 0;
+    }
+
+    .card-description {
+        font-size: 0.9rem;
+        color: #757575;
+    }
+}
+
+.statistics-card {
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
