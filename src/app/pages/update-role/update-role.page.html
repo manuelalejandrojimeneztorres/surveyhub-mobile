@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/roles"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Update Role</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Update Role</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="roleForm" (ngSubmit)="submitRoleForm()">
+    <!-- Name -->
+    <ion-item>
+      <ion-label position="floating">Role Name</ion-label>
+      <ion-select formControlName="name" placeholder="Select a role name">
+        <ion-select-option value="System Administrator">System Administrator</ion-select-option>
+        <ion-select-option value="Survey Manager">Survey Manager</ion-select-option>
+        <ion-select-option value="Respondent">Respondent</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-label position="floating">Role Name</ion-label>
+      <ion-input formControlName="name" [clearInput]="true" [counter]="true" maxlength="50"
+        placeholder="Enter role name"></ion-input>
+    </ion-item> -->
+    <ion-note color="danger" *ngIf="getFormControl('name')?.hasError('required') && getFormControl('name')?.touched">
+      The name is required.
+    </ion-note>
+
+    <!-- Description -->
+    <ion-item>
+      <ion-label position="floating">Role Description</ion-label>
+      <ion-input formControlName="description" [clearInput]="true" [counter]="true" maxlength="255"
+        placeholder="Enter role description"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('description')?.hasError('required') && getFormControl('description')?.touched">
+      The description is required.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!roleForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Update Role</span>
+    </ion-button>
+  </form>
+
+</ion-content>

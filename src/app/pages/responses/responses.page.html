@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/dashboard"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="navigateToEditProfile()">
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Responses</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Responses</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-card *ngFor="let response of responses">
+      <ion-card-header>
+        <ion-card-title>
+          Survey ID: {{ response.surveyId }}
+        </ion-card-title>
+        <ion-card-subtitle>
+          System User ID: {{ response.systemUserId }}
+        </ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <p><strong>Begin Date:</strong> {{ response.beginDate | date: 'medium' }}</p>
+        <p><strong>End Date:</strong> {{ response.endDate ? (response.endDate | date: 'medium') : 'N/A'
+          }}</p>
+        <p><strong>Created:</strong> {{ response.createdAt | date: 'medium' }}</p>
+        <p><strong>Updated:</strong> {{ response.updatedAt ? (response.updatedAt | date: 'medium') : 'N/A'
+          }}</p>
+
+        <ion-button fill="clear" slot="end" class="action-sheet-btn" (click)="presentActionSheet(response)">
+          <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddResponse()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

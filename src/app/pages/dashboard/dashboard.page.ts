@@ -16,6 +16,11 @@ export class DashboardPage implements OnInit {
     { title: 'Questions', url: 'questions', icon: 'help-outline', description: 'Manage questions' },
     { title: 'Question Options', url: 'question-options', icon: 'list-outline', description: 'Manage question options' },
     { title: 'System Users', url: 'system-users', icon: 'people-outline', description: 'Manage system users' },
+    { title: 'Roles', url: 'roles', icon: 'key-outline', description: 'Manage roles' },
+    { title: 'System User Roles', url: 'system-user-roles', icon: 'finger-print-outline', description: 'Manage system user roles' },
+    { title: 'Responses', url: 'responses', icon: 'chatbubbles-outline', description: 'Manage responses' },
+    { title: 'Answers', url: 'answers', icon: 'text-outline', description: 'Manage answers' },
+    { title: 'Answer Options', url: 'answer-options', icon: 'layers-outline', description: 'Manage answer options' }
   ];
   public filteredCards = [...this.cards];
   public showSearchBar = false;

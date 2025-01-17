@@ -1,0 +1,66 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/system-user-roles"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add System User Role</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add System User Role</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="systemUserRoleForm" (ngSubmit)="submitSystemUserRoleForm()">
+    <!-- System User ID -->
+    <ion-item>
+      <ion-label position="floating">System User ID</ion-label>
+      <ion-input formControlName="systemUserId" type="number" min="1" placeholder="Enter system user ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('systemUserId')?.hasError('required') && getFormControl('systemUserId')?.touched">
+      The system user ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('systemUserId')?.hasError('min') && getFormControl('systemUserId')?.touched">
+      The system user ID must be at least 1.
+    </ion-note>
+
+    <!-- Role ID -->
+    <ion-item>
+      <ion-label position="floating">Role ID</ion-label>
+      <ion-input formControlName="roleId" type="number" min="1" placeholder="Enter role ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('roleId')?.hasError('required') && getFormControl('roleId')?.touched">
+      The role ID is required.
+    </ion-note>
+    <ion-note color="danger" *ngIf="getFormControl('roleId')?.hasError('min') && getFormControl('roleId')?.touched">
+      The role ID must be at least 1.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!systemUserRoleForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add System User Role</span>
+    </ion-button>
+  </form>
+
+</ion-content>

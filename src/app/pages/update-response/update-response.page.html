@@ -1,0 +1,86 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/responses"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Update Response</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Update Response</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="responseForm" (ngSubmit)="submitResponseForm()">
+    <!-- Survey ID -->
+    <ion-item>
+      <ion-label position="floating">Survey ID</ion-label>
+      <ion-input formControlName="surveyId" type="number" min="1" placeholder="Enter survey ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('surveyId')?.hasError('required') && getFormControl('surveyId')?.touched">
+      The survey ID is required.
+    </ion-note>
+    <ion-note color="danger" *ngIf="getFormControl('surveyId')?.hasError('min') && getFormControl('surveyId')?.touched">
+      The survey ID must be at least 1.
+    </ion-note>
+
+    <!-- System User ID -->
+    <ion-item>
+      <ion-label position="floating">System User ID</ion-label>
+      <ion-input formControlName="systemUserId" type="number" min="1" placeholder="Enter system user ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('systemUserId')?.hasError('required') && getFormControl('systemUserId')?.touched">
+      The system user ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('systemUserId')?.hasError('min') && getFormControl('systemUserId')?.touched">
+      The system user ID must be at least 1.
+    </ion-note>
+
+    <!-- Begin Date -->
+    <ion-item>
+      <ion-label>Begin Date</ion-label>
+      <ion-datetime-button datetime="beginDatetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="beginDatetime" formControlName="beginDate" presentation="date-time" hour-cycle="h23"
+      show-default-buttons="false"></ion-datetime>
+    <ion-note color="danger"
+      *ngIf="getFormControl('beginDate')?.hasError('required') && getFormControl('beginDate')?.touched">
+      The begin date is required.
+    </ion-note>
+
+    <!-- End Date -->
+    <ion-item>
+      <ion-label>End Date</ion-label>
+      <ion-datetime-button datetime="endDatetime"></ion-datetime-button>
+    </ion-item>
+    <ion-datetime id="endDatetime" formControlName="endDate" presentation="date-time" hour-cycle="h23"
+      show-default-buttons="false"></ion-datetime>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!responseForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Update Response</span>
+    </ion-button>
+  </form>
+
+</ion-content>

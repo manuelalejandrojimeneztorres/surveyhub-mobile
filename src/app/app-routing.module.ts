@@ -136,6 +136,96 @@ const routes: Routes = [
     loadChildren: () => import('./pages/update-system-user/update-system-user.module').then(m => m.UpdateSystemUserPageModule)
   },
   {
+    path: 'roles',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager'] },
+    loadChildren: () => import('./pages/roles/roles.module').then(m => m.RolesPageModule)
+  },
+  {
+    path: 'add-role',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator'] },
+    loadChildren: () => import('./pages/add-role/add-role.module').then(m => m.AddRolePageModule)
+  },
+  {
+    path: 'update-role/:id',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator'] },
+    loadChildren: () => import('./pages/update-role/update-role.module').then(m => m.UpdateRolePageModule)
+  },
+  {
+    path: 'system-user-roles',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager'] },
+    loadChildren: () => import('./pages/system-user-roles/system-user-roles.module').then(m => m.SystemUserRolesPageModule)
+  },
+  {
+    path: 'add-system-user-role',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator'] },
+    loadChildren: () => import('./pages/add-system-user-role/add-system-user-role.module').then(m => m.AddSystemUserRolePageModule)
+  },
+  {
+    path: 'update-system-user-role/:id',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator'] },
+    loadChildren: () => import('./pages/update-system-user-role/update-system-user-role.module').then(m => m.UpdateSystemUserRolePageModule)
+  },
+  {
+    path: 'responses',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/responses/responses.module').then(m => m.ResponsesPageModule)
+  },
+  {
+    path: 'add-response',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/add-response/add-response.module').then(m => m.AddResponsePageModule)
+  },
+  {
+    path: 'update-response/:id',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/update-response/update-response.module').then(m => m.UpdateResponsePageModule)
+  },
+  {
+    path: 'answers',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/answers/answers.module').then(m => m.AnswersPageModule)
+  },
+  {
+    path: 'add-answer',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/add-answer/add-answer.module').then(m => m.AddAnswerPageModule)
+  },
+  {
+    path: 'update-answer/:id',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/update-answer/update-answer.module').then(m => m.UpdateAnswerPageModule)
+  },
+  {
+    path: 'answer-options',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },
+    loadChildren: () => import('./pages/answer-options/answer-options.module').then(m => m.AnswerOptionsPageModule)
+  },
+  {
+    path: 'add-answer-option',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager'] },
+    loadChildren: () => import('./pages/add-answer-option/add-answer-option.module').then(m => m.AddAnswerOptionPageModule)
+  },
+  {
+    path: 'update-answer-option/:id',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['System Administrator', 'Survey Manager'] },
+    loadChildren: () => import('./pages/update-answer-option/update-answer-option.module').then(m => m.UpdateAnswerOptionPageModule)
+  },
+  {
     path: 'edit-profile/:id',
     canActivate: [authGuard, roleGuard],
     data: { roles: ['System Administrator', 'Survey Manager', 'Respondent'] },

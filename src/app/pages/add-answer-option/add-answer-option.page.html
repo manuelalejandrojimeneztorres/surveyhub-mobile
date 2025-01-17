@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/answer-options"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Answer Option</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add Answer Option</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="answerOptionForm" (ngSubmit)="submitAnswerOptionForm()">
+    <!-- Answer ID -->
+    <ion-item>
+      <ion-label position="floating">Answer ID</ion-label>
+      <ion-input formControlName="answerId" type="number" min="1" placeholder="Enter answer ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('answerId')?.hasError('required') && getFormControl('answerId')?.touched">
+      The answer ID is required.
+    </ion-note>
+    <ion-note color="danger" *ngIf="getFormControl('answerId')?.hasError('min') && getFormControl('answerId')?.touched">
+      The answer ID must be at least 1.
+    </ion-note>
+
+    <!-- Question Option ID -->
+    <ion-item>
+      <ion-label position="floating">Question Option ID</ion-label>
+      <ion-input formControlName="questionOptionId" type="number" min="1"
+        placeholder="Enter question option ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionOptionId')?.hasError('required') && getFormControl('questionOptionId')?.touched">
+      The question option ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionOptionId')?.hasError('min') && getFormControl('questionOptionId')?.touched">
+      The question option ID must be at least 1.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!answerOptionForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add Answer Option</span>
+    </ion-button>
+  </form>
+
+</ion-content>

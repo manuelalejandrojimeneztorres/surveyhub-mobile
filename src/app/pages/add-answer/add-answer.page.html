@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/answers"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" ios="search-outline" md="search-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="person-circle-outline" md="person-circle-sharp"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal-outline" md="ellipsis-vertical-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Add Answer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Add Answer</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <form [formGroup]="answerForm" (ngSubmit)="submitAnswerForm()">
+    <!-- Question ID -->
+    <ion-item>
+      <ion-label position="floating">Question ID</ion-label>
+      <ion-input formControlName="questionId" type="number" min="1" placeholder="Enter question ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionId')?.hasError('required') && getFormControl('questionId')?.touched">
+      The question ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('questionId')?.hasError('min') && getFormControl('questionId')?.touched">
+      The question ID must be at least 1.
+    </ion-note>
+
+    <!-- Response ID -->
+    <ion-item>
+      <ion-label position="floating">Response ID</ion-label>
+      <ion-input formControlName="responseId" type="number" min="1" placeholder="Enter response ID"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('responseId')?.hasError('required') && getFormControl('responseId')?.touched">
+      The response ID is required.
+    </ion-note>
+    <ion-note color="danger"
+      *ngIf="getFormControl('responseId')?.hasError('min') && getFormControl('responseId')?.touched">
+      The response ID must be at least 1.
+    </ion-note>
+
+    <!-- Answer -->
+    <ion-item>
+      <ion-label position="floating">Answer</ion-label>
+      <ion-input formControlName="answer" [clearInput]="true" [counter]="true" maxlength="255"
+        placeholder="Enter answer"></ion-input>
+    </ion-item>
+    <ion-note color="danger"
+      *ngIf="getFormControl('answer')?.hasError('maxlength') && getFormControl('answer')?.touched">
+      The answer cannot be longer than 255 characters.
+    </ion-note>
+
+    <!-- Submit Button -->
+    <ion-button expand="block" size="large" type="submit" [disabled]="!answerForm.valid || isLoading">
+      <ion-spinner *ngIf="isLoading"></ion-spinner>
+      <span *ngIf="!isLoading">Add Answer</span>
+    </ion-button>
+  </form>
+
+</ion-content>
